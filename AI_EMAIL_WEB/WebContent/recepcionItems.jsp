@@ -1,5 +1,5 @@
 
-<div id="recepcion">
+
 <a href="#"><strong><i class="glyphicon glyphicon-stats"></i> Recepción de Items de Auditoría</strong></a>
 <hr>
 
@@ -7,6 +7,18 @@
 		String ip = (String) request.getAttribute("ip");
 		String puerto = (String) request.getAttribute("puerto");
 	%>
+<div id="recepcion">
+<h4>Listado de Informes de Auditoría</h4>
+<table class="table">
+  <tr>
+    <th>Modulo</th>
+    <th>Descripcion</th> 
+    <th>Fecha</th>
+  </tr>
+  <tbody id="tbody">
+	  
+  </tbody>
+</table>
 
 </div>
 
@@ -24,7 +36,15 @@
 					url : "http://"+ip+":"+puerto+"/AI_EMAIL_WEB/rest/log/all",
 					success : function(data) {
 
-						console.log(data);
+						var cantidadFilas = $('#tbody tr').length;
+
+						if(data.length > cantidadFilas){
+						
+							$.each(data, function(i, val) {							
+								$('#tbody').append("<tr><td>"+val.modulo+"</td><td>"+val.descripcion+"</td><td>"
+										+val.fecha+"</td></tr>");
+							});
+						}
 					}
 				});
 		}, 2000);
