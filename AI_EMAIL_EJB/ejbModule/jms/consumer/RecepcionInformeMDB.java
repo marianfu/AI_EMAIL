@@ -1,11 +1,19 @@
 package jms.consumer;
 
+import java.util.Date;
+
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
+import javax.jms.ObjectMessage;
 import javax.jms.TextMessage;
+import javax.json.JsonObject;
+
+import org.hornetq.utils.json.JSONObject;
+
+import entities.Log;
 
 /**
  * Message-Driven Bean implementation class for: RecepcionInformeMDB
@@ -30,12 +38,14 @@ public class RecepcionInformeMDB implements MessageListener {
     public void onMessage(Message message) {
     	
     	TextMessage msg = (TextMessage) message;
-    	try {
-			System.out.println("Mensaje: " + msg.getText());
-		} catch (JMSException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	try{
+    		
+    		System.out.println(msg.getText());
+    		
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+		
     }
 
 }
