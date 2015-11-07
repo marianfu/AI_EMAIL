@@ -21,6 +21,11 @@
 </head>
 <body>
 
+	<%
+		String ip = (String) request.getAttribute("ip");
+		String puerto = (String) request.getAttribute("puerto");
+	%>
+
 	<!-- Header -->
 	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
@@ -41,8 +46,9 @@
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand"><a><i
 						class="glyphicon glyphicon-dashboard"></i> Dashboard </a></li>
-				<li><a href="#"><i class="glyphicon glyphicon-briefcase"></i>
-						Recepción de Item de Auditoría</a></li>
+				<li><a href="#" id="items"><i
+						class="glyphicon glyphicon-briefcase"></i> Recepción de Item de
+						Auditoría</a></li>
 				<li><a href="#"><i class="glyphicon glyphicon-cog"></i>
 						Configuración de Módulos</a></li>
 				<li><a href="#"><i class="glyphicon glyphicon-cog"></i>
@@ -74,38 +80,18 @@
 	<script src="js/index.js"></script>
 
 	<script>
-		$("#listar").click(function() {
 
-			$.ajax({
-				type : "GET",
-				dataType : "json",
-				crossDomain : true,
-				url : "http://localhost:8180/RestExample/rest/jugadores/all",
-				success : function(data) {
+	$(document).ready(function() {
 
-					console.log(data.length);
-					createTable(data);
-				}
-			});
+	var ip = "<%= ip %>";
+	var puerto = <%= puerto %>;
+	
+		$("#items").click(function() {
+
+			// Carga el servlet recepcion items
+			$("#contenido").load("items");
 		});
-
-		$("#listar_id")
-				.click(
-						function() {
-
-							var id = $("#id_club").val();
-							$
-									.ajax({
-										type : "GET",
-										dataType : "json",
-										url : "http://localhost:8180/RestExample/rest/jugadores/club/"
-												+ id,
-										success : function(data) {
-
-											createTable(data);
-										}
-									});
-						});
+	});
 	</script>
 
 </body>

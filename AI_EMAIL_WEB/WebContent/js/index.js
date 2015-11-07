@@ -11,19 +11,7 @@ $("#menu_principal").click(function() {
 //	cargarContenido('Ventas');
 //});
 
-$('#linkReporte').click(function() {
-	cargarContenido('Reporte');
-});
 
-function cargarContenido(url) {
-	var loading = $('#loading');
-	loading.show();
-	var contenido = $('#contenido');
-	contenido.html('');
-	contenido.load(url, function() {
-		loading.hide();
-	});
-}
 
 $("#menu_principal").click(function() {
 	$("#myTable").empty();

@@ -14,17 +14,16 @@ import entities.Modulo;
 import entities.Modulos;
 
 /**
- * Servlet implementation class ServletInicio
+ * Servlet implementation class ServletRecepcionItem
  */
-@WebServlet("/inicio")
-public class ServletInicio extends HttpServlet {
+@WebServlet("/items")
+public class ServletRecepcionItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	@EJB
-	private ModuloBean moduloBean;
-		
-
-    public ServletInicio() {
+    @EJB
+    private ModuloBean moduloBean;
+	
+    public ServletRecepcionItem() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +32,6 @@ public class ServletInicio extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
 		Modulo m = moduloBean.getMiConfiguracion();
 		if(m == null){
@@ -43,7 +41,8 @@ public class ServletInicio extends HttpServlet {
 		request.setAttribute("ip", m.getIp());
 		request.setAttribute("puerto", m.getPort());
 		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getRequestDispatcher("recepcionItems.jsp").forward(request, response);
+		
 	}
 
 	/**
