@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="AI_EMAIL_EJB">
+        <wb-resource deploy-path="/" source-path="/ejbModule" tag="defaultRootSource"/>
+        <property name="java-output-path" value="/AI_EMAIL_EJB/build/classes"/>
+        <property name="ClientProject" value="AI_EMAIL_EJBClient"/>
+        <property name="ClientJARURI" value="AI_EMAIL_EJBClient.jar"/>
+    </wb-module>
+</project-modules>
