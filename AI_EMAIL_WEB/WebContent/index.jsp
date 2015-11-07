@@ -49,7 +49,7 @@
 				<li><a href="#" id="items"><i
 						class="glyphicon glyphicon-briefcase"></i> Recepción de Item de
 						Auditoría</a></li>
-				<li><a href="#"><i class="glyphicon glyphicon-cog"></i>
+				<li><a href="#" id="confi"><i class="glyphicon glyphicon-cog"></i>
 						Configuración de Módulos</a></li>
 				<li><a href="#"><i class="glyphicon glyphicon-cog"></i>
 						Acerca de</a></li>
@@ -90,6 +90,12 @@
 
 			// Carga el servlet recepcion items
 			$("#contenido").load("items");
+		});
+
+		$("#confi").click(function() {
+
+			// Carga el servlet recepcion configuracion
+			$("#contenido").load("configuracion");
 		});
 	});
 	</script>

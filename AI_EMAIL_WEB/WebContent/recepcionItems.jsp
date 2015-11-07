@@ -4,6 +4,8 @@
 		Recepción de Items de Auditoría</strong></a>
 <hr>
 
+<button id="pool" class="btn btn-success">Pool</button>
+
 <%
 	String ip = (String) request.getAttribute("ip");
 	String puerto = (String) request.getAttribute("puerto");
@@ -31,14 +33,29 @@
 		var ip = "<%= ip %>";
 		var puerto = <%= puerto %>;
 		var flag = 0;
-		
-		setInterval(function() {
+
+		$("#pool").click(function(){
+
+			if(flag == 0){
+				flag = 1;
+				$("#pool").removeClass("btn-success");
+				$("#pool").addClass("btn-warning");
+			}
+			else{
+				$("#pool").removeClass("btn-warning");
+				$("#pool").addClass("btn-success");
+				flag = 0;
+			}
+			
+			setInterval(function() {
+				if(flag == 1){
 				$.ajax({
 					type : "GET",
 					dataType : "json",
 					url : "http://"+ip+":"+puerto+"/AI_EMAIL_WEB/rest/log/all",
 					success : function(data) {
 
+						
 						var cantidadFilas = $('#tbody tr').length;
 
 						if(data.length > cantidadFilas){
@@ -49,8 +66,10 @@
 							});
 						}
 					}
-				});
+				})};
 		}, 2000);
+	});
+		
 
 		$("#contar").click(function() {
 
