@@ -1,17 +1,14 @@
 package jms.consumer;
 
-import java.util.Date;
-
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
-import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import javax.jms.ObjectMessage;
 import javax.jms.TextMessage;
-import javax.json.JsonObject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
-import org.hornetq.utils.json.JSONObject;
+import com.google.gson.Gson;
 
 import entities.Log;
 
@@ -25,9 +22,9 @@ import entities.Log;
         @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge") })
 public class RecepcionInformeMDB implements MessageListener {
 
-    /**
-     * Default constructor. 
-     */
+    @PersistenceContext(unitName = "CRM")
+    private EntityManager em;
+    
     public RecepcionInformeMDB() {
         // TODO Auto-generated constructor stub
     }
@@ -37,9 +34,13 @@ public class RecepcionInformeMDB implements MessageListener {
      */
     public void onMessage(Message message) {
     	
+    	
     	TextMessage msg = (TextMessage) message;
     	try{
-    		
+    		Gson gson = new Gson();
+    		Log log = (Log) gson.fromJson(msg.getText(), Log.class);
+    		em.persist(log);
+    		em.flush();
     		System.out.println(msg.getText());
     		
     	}catch(Exception e){

@@ -1,24 +1,27 @@
 
 
-<a href="#"><strong><i class="glyphicon glyphicon-stats"></i> Recepción de Items de Auditoría</strong></a>
+<a href="#"><strong><i class="glyphicon glyphicon-stats"></i>
+		Recepción de Items de Auditoría</strong></a>
 <hr>
 
-	<%
-		String ip = (String) request.getAttribute("ip");
-		String puerto = (String) request.getAttribute("puerto");
-	%>
+<%
+	String ip = (String) request.getAttribute("ip");
+	String puerto = (String) request.getAttribute("puerto");
+%>
 <div id="recepcion">
-<h4>Listado de Informes de Auditoría</h4>
-<table class="table">
-  <tr>
-    <th>Modulo</th>
-    <th>Descripcion</th> 
-    <th>Fecha</th>
-  </tr>
-  <tbody id="tbody">
-	  
-  </tbody>
-</table>
+	<br>
+	<h4>Listado de Informes de Auditoría</h4>
+	<br>
+	<table class="table">
+		<tr>
+			<th>Modulo</th>
+			<th>Descripcion</th>
+			<th>Fecha</th>
+		</tr>
+		<tbody id="tbody">
+
+		</tbody>
+	</table>
 
 </div>
 
@@ -39,7 +42,7 @@
 						var cantidadFilas = $('#tbody tr').length;
 
 						if(data.length > cantidadFilas){
-						
+							$("#tbody").empty();
 							$.each(data, function(i, val) {							
 								$('#tbody').append("<tr><td>"+val.modulo+"</td><td>"+val.descripcion+"</td><td>"
 										+val.fecha+"</td></tr>");
