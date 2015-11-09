@@ -4,7 +4,7 @@
 		Recepción de Items de Auditoría</strong></a>
 <hr>
 
-<button id="pool" class="btn btn-success">Pool</button>
+<button id="pool" class="btn btn-success">Poll</button>
 
 <%
 	String ip = (String) request.getAttribute("ip");
