@@ -55,7 +55,6 @@
 					url : "http://"+ip+":"+puerto+"/AI_EMAIL_WEB/rest/log/all",
 					success : function(data) {
 
-						
 						var cantidadFilas = $('#tbody tr').length;
 
 						if(data.length > cantidadFilas){

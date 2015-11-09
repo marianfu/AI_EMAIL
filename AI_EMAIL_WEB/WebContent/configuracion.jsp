@@ -23,7 +23,7 @@
 			<th>Activo</th>
 			<th>Check</th>
 		</tr>
-		<tbody id="tbody">
+		<tbody id="tbody_conf">
 			<tr>
 				<%if(ip != null) {%>
 					<td id="ip"><%= ip %></td>
@@ -83,12 +83,12 @@
 	$(document).ready(function() {
 		var ip = "<%= ip %>";
 		var puerto = <%= puerto %>;
-		var flag = 0;
+		
 		
 		
 		// ELIMINA LA CONFIGURACION ACTUAL
 		$("#eliminar_conf").click(function(){
-			$('#tbody tr').filter(':has(:checkbox:checked)').find('#ip').each(function(){
+			$('#tbody_conf tr').filter(':has(:checkbox:checked)').find('#ip').each(function(){
 				var ipSelected = ($(this).html());
 
 				$.ajax({
@@ -98,7 +98,7 @@
 					url : "eliminarConfiguracion",
 					success : function(data) {
 
-						$("#tbody").empty();
+						$("#tbody_conf").empty();
 					}		
 				});
 			});
