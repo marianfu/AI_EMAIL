@@ -25,18 +25,22 @@
 		</tr>
 		<tbody id="tbody">
 			<tr>
-				<td><%= ip %></td>
-				<td><%= puerto %></td>
-				<td><%= cola %></td>
-				<td><%= modulo %></td>
-				<td><%= activo %></td>
-				<td><input type="checkbox"/></td>
+				<%if(ip != null) {%>
+					<td id="ip"><%= ip %></td>
+					<td id="port"><%= puerto %></td>
+					<td><%= cola %></td>
+					<td><%= modulo %></td>
+					<td><%= activo %></td>
+					<td><input type="checkbox"/></td>
+				<% }%>
 			</tr>
 		</tbody>
 	</table>
 
-	<button type="button" class="btn btn-primary" data-toggle="modal"
+	<button id="agregar_conf" type="button" class="btn btn-primary" data-toggle="modal"
 		data-target="#exampleModal" data-whatever="@mdo">Agregar Configuración</button>
+	
+	<button id="eliminar_conf" type="button" class="btn btn-danger">Eliminar Configuración</button>
 
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel">
@@ -53,21 +57,21 @@
 					<form>
 						<div class="form-group">
 							<label for="ip" class="control-label">Dirección IP:</label>
-							<input type="text" class="form-control" id="ip">
+							<input type="text" class="form-control" id="ip_dir">
 						</div>
 						<div class="form-group">
 							<label for="puerto" class="control-label">Puerto:</label>
 							<input type="text" class="form-control" id="puerto">
 						</div>
 						<div class="form-group">
-							<label for="activo">Activo:</label>
-							<input type="checkbox" class="form-control" id="activo">
+							<label for="ip" class="control-label">Cola:</label>
+							<input type="text" class="form-control" id="cola">
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-					<button type="button" class="btn btn-primary">Guardar</button>
+					<button id="guardar_conf" type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
 				</div>
 			</div>
 		</div>
@@ -81,17 +85,40 @@
 		var puerto = <%= puerto %>;
 		var flag = 0;
 		
-		$("#contar").click(function() {
+		
+		// ELIMINA LA CONFIGURACION ACTUAL
+		$("#eliminar_conf").click(function(){
+			$('#tbody tr').filter(':has(:checkbox:checked)').find('#ip').each(function(){
+				var ipSelected = ($(this).html());
 
-			$.ajax({
-				type : "POST",
-				data : cantidad,
-				//dataType : "json",
-				url : "PoolDatabase",
-				success : function(data) {
+				$.ajax({
+					type : "POST",
+					data : {"ip" : ipSelected },
+					//dataType : "json",
+					url : "eliminarConfiguracion",
+					success : function(data) {
 
-				}
+						$("#tbody").empty();
+					}		
+				});
 			});
+			
 		});
-	});
+
+		// AGREGA UNA NUEVA CONFIGURACION DE EMAIL 
+		$("#guardar_conf").click(function(){
+			
+				$.ajax({
+					type : "POST",
+					data : {"ip_dir" : $("#ip_dir").val(), "puerto": $("#puerto").val(), "cola": $("#cola").val()},
+					//dataType : "json",
+					url : "agregarConfiguracion",
+					success : function(data) {
+						
+					}		
+				});
+			});
+			
+		});
+	
 </script>

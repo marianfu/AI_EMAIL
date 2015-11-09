@@ -23,14 +23,14 @@ public class ModuloBean {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Modulo setMiConfuracion(Modulo modulo) {
+	public Modulo setMiConfiguracion(Modulo modulo) {
 
 		em.persist(modulo);
 		em.flush();
 		return modulo;
 	}
 
-	public Modulo updateMiConfuracion(Modulo modulo) {
+	public Modulo updateMiConfiguracion(Modulo modulo) {
 
 		Modulo email = em.find(Modulo.class, modulo.getId());
 		if (email == null) {
@@ -52,6 +52,12 @@ public class ModuloBean {
 			e.printStackTrace();
 		}
 		return m;
+	}
+	
+	public void deleteMiConfiguracion(String ip){
+		
+		Modulo m = (Modulo) em.createQuery("select m from Modulo m where m.ip = ?").setParameter(1, ip).getSingleResult();
+		em.remove(m);
 	}
 
 }
