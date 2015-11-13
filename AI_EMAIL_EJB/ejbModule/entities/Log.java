@@ -66,5 +66,10 @@ public class Log extends PersistentObject implements ViewGenerator<LogView> {
 		view.setFecha(fecha);
 		return view;
 	}
+	
+	public String toString(){
+		
+		return String.format("Modulo: %s, Descripcion: %s, Fecha: %S", modulo, descripcion, fecha.toString());
+	}
 
 }

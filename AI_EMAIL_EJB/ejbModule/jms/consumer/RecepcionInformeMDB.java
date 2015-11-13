@@ -1,5 +1,9 @@
 package jms.consumer;
 
+import java.lang.reflect.Type;
+import java.util.List;
+import java.util.logging.Logger;
+
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.jms.Message;
@@ -9,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import entities.Log;
 
@@ -35,14 +40,17 @@ public class RecepcionInformeMDB implements MessageListener {
     public void onMessage(Message message) {
     	
     	
-    	TextMessage msg = (TextMessage) message;
+    	TextMessage json = (TextMessage) message;
     	try{
-    		Gson gson = new Gson();
-    		Log log = (Log) gson.fromJson(msg.getText(), Log.class);
-    		em.persist(log);
-    		em.flush();
-    		System.out.println(msg.getText());
+    		// Convert JSON String to List
+    		Type type = new TypeToken<List<Log>>(){}.getType();
+    		List<Log> logs = new Gson().fromJson(json.getText(), type);
+    		Logger.getAnonymousLogger().info("Informes recibidos: "+logs.size());
     		
+    		for(Log l : logs){
+    			em.persist(l);
+    			em.flush();
+    		}
     	}catch(Exception e){
     		e.printStackTrace();
     	}

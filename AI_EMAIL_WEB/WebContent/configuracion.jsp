@@ -2,8 +2,7 @@
 
 <a href="#"><strong><i class="glyphicon glyphicon-stats"></i>
 		Configuración de Modulos</strong></a>
-<hr>
-
+		<hr>
 <%
 	String ip = (String) request.getAttribute("ip");
 	String puerto = (String) request.getAttribute("puerto");
@@ -12,9 +11,9 @@
 	String activo = (String) request.getAttribute("activo");
 %>
 <div>
-	<br>
+
 	<h4>Mi configuración</h4>
-	<table class="table">
+	<table id="table_conf" class="table">
 		<tr>
 			<th>Ip</th>
 			<th>Puerto</th>
@@ -84,7 +83,9 @@
 		var ip = "<%= ip %>";
 		var puerto = <%= puerto %>;
 		
-		
+		if(ip != null && puerto !=  null){
+			$("#agregar_conf").addClass("disabled");
+		}
 		
 		// ELIMINA LA CONFIGURACION ACTUAL
 		$("#eliminar_conf").click(function(){
@@ -99,6 +100,7 @@
 					success : function(data) {
 
 						$("#tbody_conf").empty();
+						$("#agregar_conf").removeClass("disabled");			
 					}		
 				});
 			});
@@ -114,7 +116,10 @@
 					//dataType : "json",
 					url : "agregarConfiguracion",
 					success : function(data) {
-						
+
+						$('#table_conf > tbody:last-child').append('<tr><td>'+ip_dir+'</td><td>'+puerto+'</td><td>'+cola+'</td>'+
+								'<td>Email<td>'+Si+'</td><td><input type="checkbox"/></td></tr>');
+						$("#agregar_conf").addClass("disabled");
 					}		
 				});
 			});

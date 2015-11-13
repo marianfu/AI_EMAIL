@@ -47,7 +47,9 @@ public class ModuloBean {
 
 		Modulo m = null;
 		try {
-			m = (Modulo) em.createQuery("select m from Modulo m where m.modulo = 'Email'").getSingleResult();
+			Long count = (Long) em.createQuery("select count(m) from Modulo m").getSingleResult();
+			if(count > 0)
+				m = (Modulo) em.createQuery("select m from Modulo m where m.modulo = 'Email'").getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

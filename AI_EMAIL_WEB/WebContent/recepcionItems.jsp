@@ -24,7 +24,24 @@
 
 		</tbody>
 	</table>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Configuración del Módulo</h4>
+      </div>
+      <div class="modal-body">
+        Actualmente no hay ninguna configuración agregada, es necesario que la ingrese para poder continuar.
+      </div>
+      <div class="modal-footer">
+        <button id="ir_conf" type="button" class="btn btn-primary" data-dismiss="modal">Ir a Configuración</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -33,6 +50,10 @@
 		var ip = "<%= ip %>";
 		var puerto = <%= puerto %>;
 		var flag = 0;
+
+		if(ip == null || puerto == null){
+			$('#myModal').modal('show');
+		}
 
 		$("#pool").click(function(){
 
@@ -81,6 +102,13 @@
 
 				}
 			});
+		});
+
+		$("#ir_conf").click(function(){
+			
+			$('#myModal').on('hidden.bs.modal', function () {
+				$("#contenido").load("configuracion"); 
+			});	
 		});
 	});
 </script>

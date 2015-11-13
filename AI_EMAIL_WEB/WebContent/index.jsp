@@ -51,8 +51,8 @@
 						Auditoría</a></li>
 				<li><a href="#" id="confi"><i class="glyphicon glyphicon-cog"></i>
 						Configuración de Módulos</a></li>
-				<li><a href="#"><i class="glyphicon glyphicon-cog"></i>
-						Acerca de</a></li>
+				<li><a href="#" id="about"><i class="glyphicon glyphicon-info-sign"></i>
+						Acerca del Módulo</a></li>
 			</ul>
 		</div>
 		<!-- /Sidebar -->
@@ -79,26 +79,6 @@
 
 	<script src="js/index.js"></script>
 
-	<script>
-
-	$(document).ready(function() {
-
-	var ip = "<%= ip %>";
-	var puerto = <%= puerto %>;
-	
-		$("#items").click(function() {
-
-			// Carga el servlet recepcion items
-			$("#contenido").load("items");
-		});
-
-		$("#confi").click(function() {
-
-			// Carga el servlet recepcion configuracion
-			$("#contenido").load("configuracion");
-		});
-	});
-	</script>
 
 </body>
 
