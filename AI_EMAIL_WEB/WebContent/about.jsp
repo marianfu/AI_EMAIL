@@ -12,6 +12,6 @@
 	String activo = (String) request.getAttribute("activo");
 %>
 <div>
-	<t>Este módulo se encarga de recibir de ítems de auditoría del módulo Logística y Monitoreo por medio de JMS. Los mismos podrán ser enviados posteriormente por mail.</t>
+	<t>Este módulo se encarga de recibir ítems de auditoría del módulo Logística y Monitoreo por medio de JMS. Los mismos podrán ser enviados posteriormente por mail.</t>
 </div>
 
